@@ -8,6 +8,7 @@ defmodule Phoenix1Web.Router do
     plug :put_root_layout, {Phoenix1Web.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Phoenix1Web.Plugs.Locale, "en"
   end
 
   pipeline :api do
@@ -18,6 +19,9 @@ defmodule Phoenix1Web.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/hello", HelloController, :index
+    get "/show", HelloController, :show
+    # resources "/users", UserController, only: [:index, :show] resource routes
   end
 
   # Other scopes may use custom stacks.
